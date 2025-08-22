@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="description" content="LagSw product key verification." />
+  <title>LagSw — Product Key Verification</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; line-height: 1.5; }
+    button, input { font: inherit; }
+    :root {
+      --bg: #0b0f14; --bg-elev: rgba(255,255,255,0.04); --card: rgba(255,255,255,0.06); --glass-border: rgba(255,255,255,0.18);
+      --fg: #e6eaf0; --muted: #a5b0c2; --accent: #7aa2ff; --accent-pressed: #5b86ff; --warn: #ffb86b; --error: #ff6b6b; --ok: #7bd88f; --focus: #9bb8ff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35); --radius: 14px; --space: 16px; --space-lg: 24px; --space-xl: 48px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f6f8fb; --bg-elev: rgba(0,0,0,0.02); --card: rgba(255,255,255,0.9); --glass-border: rgba(0,0,0,0.08);
+        --fg: #0f172a; --muted: #475569; --accent: #2b6cff; --accent-pressed: #1f56cc; --warn: #b7791f; --error: #dc2626; --ok: #059669; --focus: #3b82f6;
+      }
+    }
+    body {
+      min-height: 100vh;
+      background: radial-gradient(1200px 600px at 10% -10%, rgba(123,162,255,0.25), transparent 60%),
+                  radial-gradient(1200px 600px at 90% 110%, rgba(123,216,143,0.2), transparent 60%),
+                  var(--bg); color: var(--fg);
+      display: grid; grid-template-rows: 1fr auto;
+    }
+    .container { display: grid; place-items: center; padding: var(--space-xl) var(--space); }
+    .card {
+      width: min(700px, 92vw); background: linear-gradient(180deg, var(--card), var(--bg-elev)); backdrop-filter: blur(10px) saturate(120%);
+      border: 1px solid var(--glass-border); border-radius: var(--radius); box-shadow: var(--shadow); padding: calc(var(--space-lg) + 6px);
+    }
+    .header { display: flex; align-items: center; gap: var(--space); margin-bottom: var(--space-lg); }
+    .logo { width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg, var(--accent), var(--ok));
+            display: grid; place-items: center; box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+    .title h1 { margin: 0; font-size: 1.25rem; font-weight: 700; letter-spacing: 0.2px; }
+    .title p { margin: 2px 0 0; color: var(--muted); font-size: 0.95rem; }
+    .form { display: grid; gap: var(--space); }
+    .field { display: grid; gap: 8px; }
+    .label-line { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+    .label-line label { font-weight: 600; }
+    .hint { color: var(--muted); font-size: 0.9rem; }
+    .input { position: relative; }
+    input[type="text"] {
+      width: 100%; padding: 14px 48px 14px 14px; border-radius: 12px; border: 1px solid var(--glass-border);
+      background: rgba(0,0,0,0.08); color: var(--fg); outline: none; transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    @media (prefers-color-scheme: light) { input[type="text"] { background: rgba(255,255,255,0.88); } }
+    input[type="text"]:focus { border-color: var(--focus); box-shadow: 0 0 0 3px color-mix(in oklab, var(--focus) 25%, transparent); }
+    input[aria-invalid="true"] { border-color: var(--error); }
+    .actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .btn {
+      appearance: none; border: none; border-radius: 12px; padding: 12px 18px; font-weight: 700; letter-spacing: 0.2px;
+      background: var(--accent); color: #fff; cursor: pointer; transition: transform 0.06s ease, box-shadow 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25); display: inline-flex; align-items: center; gap: 10px;
+    }
+    .btn:active { transform: translateY(1px); background: var(--accent-pressed); }
+    .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+    .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.5); border-top-color: white; border-radius: 50%; animation: spin 0.9s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .status { min-height: 24px; font-size: 0.95rem; }
+    .status[aria-busy="true"] { opacity: 0.8; }
+    .status .ok { color: var(--ok); } .status .warn { color: var(--warn); } .status .err { color: var(--error); }
+    .terms { color: var(--muted); font-size: 0.9rem; }
+    footer { border-top: 1px solid var(--glass-border); padding: var(--space-lg) var(--space); display: grid; gap: 10px;
+             align-content: center; justify-items: center; color: var(--muted); background: linear-gradient(0deg, rgba(0,0,0,0.04), transparent); }
+    .footer-line { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .dot { opacity: 0.5; }
+    .tg { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .tg:hover { text-decoration: underline; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card" aria-labelledby="app-title">
+      <div class="header">
+        <div class="logo" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2l7 3v6c0 5-3.5 9-7 11-3.5-2-7-6-7-11V5l7-3z" stroke="white" opacity="0.9" stroke-width="1.4"/>
+            <path d="M9 12l2 2 4-4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="title">
+          <h1 id="app-title">LagSw — Product Key Verification</h1>
+          <p>Enter your product key to unlock the download.</p>
+        </div>
+      </div>
+
+      <form id="verify-form" class="form" novalidate>
+        <div class="field">
+          <div class="label-line">
+            <label for="product-key">Product Key</label>
+            <div class="hint" id="key-hint">Format example: XXXX-XXXX-XXXX-XXXX</div>
+          </div>
+          <div class="input">
+            <input id="product-key" name="product-key" type="text" inputmode="latin" autocomplete="off"
+                   autocapitalize="characters" spellcheck="false" aria-describedby="key-hint" aria-invalid="false"
+                   placeholder="Enter your key here" maxlength="64" required />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="verify-btn" class="btn" type="submit"><span class="btn-label">Verify</span></button>
+          <div role="status" aria-live="polite" class="status" id="status"></div>
+        </div>
+
+        <p class="terms">By verifying, you agree that your key may be validated on our server. Ensure you are using a trusted network. Never share your key publicly.</p>
+      </form>
+
+      <noscript><p class="hint">JavaScript is required to verify your key and initiate the download.</p></noscript>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-line">
+      <span>© <span id="year"></span> LagSw</span>
+      <span class="dot">•</span>
+      <a class="tg" href="https://t.me/ciaomcqueenn" rel="noopener noreferrer" target="_blank" title="Contact via Telegram">@ciaomcqueenn</a>
+      <span class="dot">•</span>
+      <span>Disclaimer: The download is provided “as is”. No liability for loss of data or damages arising from use.</span>
+    </div>
+  </footer>
+
+  <script>
+  "use strict";
+  // Конфиг: один порт и тот же origin.
+  const CONFIG = Object.freeze({
+    apiBaseUrl: "/api",
+    verifyEndpoint: "/verify-key",
+    downloadBasePath: "/downloads",
+    sendUserAgent: true
+  });
+
+  function isLikelyKeyFormat(value) {
+    if (!value) return false;
+    const normalized = value.trim().toUpperCase();
+    const re = /^(?:[A-Z0-9]{4,6}-){3,4}[A-Z0-9]{4,6}$/;
+    return re.test(normalized);
+  }
+  function generateRequestId() {
+    const buf = new Uint8Array(16);
+    crypto.getRandomValues(buf);
+    const hex = [...buf].map(b => b.toString(16).padStart(2,"0"));
+    return [hex.slice(0,4).join(""), hex.slice(4,6).join(""), hex.slice(6,8).join(""),
+            hex.slice(8,10).join(""), hex.slice(10,16).join("")].join("-");
+  }
+  function renderStatus(text, tone) {
+    const status = document.getElementById("status");
+    status.setAttribute("aria-busy", text ? "true" : "false");
+    status.innerHTML = text ? `<span class="${tone||''}">${text}</span>` : "";
+  }
+  function setSubmitting(on) {
+    const btn = document.getElementById("verify-btn");
+    const label = btn.querySelector(".btn-label");
+    if (on) {
+      btn.setAttribute("disabled","true");
+      if (!btn.querySelector(".spinner")) {
+        const sp = document.createElement("span"); sp.className = "spinner"; btn.prepend(sp);
+      }
+      label.textContent = "Verifying";
+    } else {
+      btn.removeAttribute("disabled");
+      const sp = btn.querySelector(".spinner"); if (sp) sp.remove();
+      label.textContent = "Verify";
+    }
+  }
+  function toDownloadUrl(payload) {
+    if (payload && typeof payload.url === "string") return payload.url;
+    if (payload && typeof payload.file === "string") {
+      const base = CONFIG.downloadBasePath.replace(/\/$/, "");
+      const file = payload.file.replace(/^\//, "");
+      return `${base}/${file}`;
+    }
+    return null;
+  }
+  function triggerDownload(url) {
+    if (!url) return false;
+    const a = document.createElement("a");
+    a.href = url;
+    try { a.download = url.split("/").pop() || "download"; } catch(_) {}
+    a.rel = "noopener";
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    return true;
+  }
+  async function verifyProductKey(productKey) {
+    const url = `${CONFIG.apiBaseUrl}${CONFIG.verifyEndpoint}`;
+    const body = { productKey, requestId: generateRequestId() };
+    if (CONFIG.sendUserAgent) body.userAgent = navigator.userAgent;
+    const resp = await fetch(url, { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(body) });
+    let json = null; try { json = await resp.json(); } catch(_) {}
+    return { status: resp.status, ok: resp.ok, json };
+  }
+
+  let lastSubmitAt = 0; const COOLDOWN_MS = 800;
+  function canSubmitNow() { const now = Date.now(); return (now - lastSubmitAt) >= COOLDOWN_MS; }
+
+  (function init() {
+    document.getElementById("year").textContent = String(new Date().getFullYear());
+    const form = document.getElementById("verify-form");
+    const input = document.getElementById("product-key");
+    input.addEventListener("input", () => {
+      const looks = isLikelyKeyFormat(input.value.trim().toUpperCase());
+      input.setAttribute("aria-invalid", looks || input.value.length === 0 ? "false" : "true");
+    });
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!canSubmitNow()) return; lastSubmitAt = Date.now();
+      const raw = input.value.trim();
+      if (raw.length === 0) { renderStatus("Please enter your product key.", "warn"); input.focus(); return; }
+      setSubmitting(true); renderStatus("Validating key…", "");
+      try {
+        const result = await verifyProductKey(raw);
+        const payload = result.json || {};
+        if (result.ok && payload && payload.ok) {
+          const downloadUrl = toDownloadUrl(payload);
+          if (downloadUrl) { renderStatus("Key verified. Starting download…", "ok"); triggerDownload(downloadUrl); }
+          else { renderStatus("Key verified, but no download URL was provided by the server.", "warn"); }
+        } else {
+          const message = (payload && payload.message) ? payload.message : "Invalid key or request rejected.";
+          renderStatus(message, "err");
+        }
+      } catch (err) {
+        renderStatus("Network or server error. Please try again later.", "err");
+        console.error(err);
+      } finally { setSubmitting(false); }
+    });
+  })();
+  </script>
+</body>
+</html>
