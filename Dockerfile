@@ -1,19 +1,27 @@
-# Виртуальные окружения / IDE
-.venv/
-.vscode/
-.idea/
+# Webka – LagSw Key Verifier
+FROM python:3.12-slim
 
-# Кэш
-__pycache__/
-*.pyc
-*.pyo
+# Создадим рабочую директорию
+WORKDIR /app
 
-# Git
-.git/
-.gitignore
+# Установим зависимости для Python
+COPY backend/requirements.txt /app/backend/requirements.txt
+RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 
-# Логи
-*.log
+# Скопируем весь проект
+COPY . /app
 
-# Локальные артефакты, если будут
-*.zip
+# Создадим каталог для базы и загрузок
+RUN mkdir -p /data /app/downloads
+
+# Переменные окружения
+ENV PYTHONUNBUFFERED=1
+ENV PORT=8080
+
+# Запускаем наш сервер
+CMD ["python", "backend/verifier.py", "serve",
+     "--host", "0.0.0.0",
+     "--port", "8080",
+     "--static-dir", "frontend",
+     "--downloads-dir", "downloads",
+     "--db", "/data/keys.db"]
